@@ -6,7 +6,6 @@ interface PropsButton extends HTMLAttributes<HTMLButtonElement | HTMLLinkElement
   to?: string;
   href?: string;
   className?: string;
-  title?: string;
   [props: string]: any;
 }
 
