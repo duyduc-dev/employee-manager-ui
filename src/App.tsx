@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useId } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { PUBLIC_ROUTES } from './routes';
 
 function App() {
+  const id = useId();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          {PUBLIC_ROUTES.map(({ route, page, layout }) => {
+            const Page = page;
+            const Layout = layout;
+            return (
+              <Route
+                key={id}
+                path={route}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              />
+            );
+          })}
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
